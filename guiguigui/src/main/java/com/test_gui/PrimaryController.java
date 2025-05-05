@@ -3,6 +3,7 @@ package com.test_gui;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
@@ -161,13 +162,13 @@ public class PrimaryController {
     }
 
     @FXML
-    private PieChart countryPieChart;
+    private PieChart pieChart;
 
-    private final String DATA_FILE = "data_placeholder/country_requests.txt"; // adjust the path if needed
+    private final String DATA_FILE = "/data_placeholder/country_request.txt"; // fixed file name and added leading slash
 
     @FXML
     public void initialize() {
-        Map<String, Integer> countryData = loadDataFromFile();
+        Map<String, Integer> countryData = loadDataFromFile(DATA_FILE);
         if (countryData == null || countryData.isEmpty()) return;
 
         int totalRequests = countryData.values().stream().mapToInt(Integer::intValue).sum();
@@ -183,36 +184,35 @@ public class PrimaryController {
             pieChartData.add(new PieChart.Data(label, requests));
         }
 
-        countryPieChart.setData(pieChartData);
+        pieChart.setData(pieChartData);
     }
 
-    private Map<String, Integer> loadDataFromFile() {
+    public static Map<String, Integer> loadDataFromFile(String filePath) {
         Map<String, Integer> data = new HashMap<>();
-    
-        try (BufferedReader reader = new BufferedReader(
-                new InputStreamReader(
-                        getClass().getResourceAsStream("/data_placeholder/country_requests.txt")))) {
-    
-            String line = reader.readLine(); // entire line
+
+        try (InputStream input = PrimaryController.class.getResourceAsStream(filePath);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(input))) {
+
+            if (input == null) {
+                System.err.println("Error reading data: file not found at " + filePath);
+                return null;
+            }
+            String line = reader.readLine();
             if (line != null) {
                 String[] entries = line.split(",");
-    
                 for (String entry : entries) {
-                    String[] parts = entry.trim().split("="); // clean and split
+                    String[] parts = entry.trim().split("=");
                     if (parts.length == 2) {
-                        String country = parts[0].trim();
-                        int count = Integer.parseInt(parts[1].trim());
-                        data.put(country, count);
+                        data.put(parts[0], Integer.parseInt(parts[1]));
                     }
                 }
             }
-        } catch (IOException | NumberFormatException | NullPointerException e) {
+        } catch (Exception e) {
             System.err.println("Error reading data: " + e.getMessage());
         }
-    
         return data;
     }
-    
+
     // Apply timestamp filter — placeholder for now
     @FXML
     private void onApplyFilterButton() {

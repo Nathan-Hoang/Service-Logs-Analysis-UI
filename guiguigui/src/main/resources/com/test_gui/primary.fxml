@@ -130,7 +130,8 @@
         <StackPane prefHeight="300" style="-fx-border-color: #444444;">
           <children>
             <Label style="-fx-text-fill: gray;" text="Graph Area (Placeholder)"/>
-            <PieChart/>
+            <PieChart fx:id="pieChart">
+            </PieChart>
           </children>
         </StackPane>
       </children>

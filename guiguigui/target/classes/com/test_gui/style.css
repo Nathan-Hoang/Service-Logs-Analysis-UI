@@ -171,3 +171,8 @@
     -fx-text-fill: #AAAAAA;
     -fx-font-style: italic;
 }
+
+.chart-pie-label {
+    -fx-fill: #00ffff; /* Neon blue */
+    -fx-font-weight: bold;
+}
