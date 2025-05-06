@@ -127,13 +127,19 @@
           </children>
         </VBox>
         <!-- Placeholder for chart area -->
-        <StackPane prefHeight="300" style="-fx-border-color: #444444;">
+        <HBox spacing="20" prefHeight="300" style="-fx-border-color: #444444;">
           <children>
-            <Label style="-fx-text-fill: gray;" text="Graph Area (Placeholder)"/>
-            <PieChart fx:id="pieChart">
-            </PieChart>
+            <PieChart fx:id="pieChart" prefWidth="600"/>
+            <LineChart fx:id="lineChart" prefWidth="600">
+              <xAxis>
+                <CategoryAxis label="Time (Hourly)"/>
+              </xAxis>
+              <yAxis>
+                <NumberAxis label="Requests"/>
+              </yAxis>
+            </LineChart>
           </children>
-        </StackPane>
+        </HBox>
       </children>
     </VBox>
   </center>

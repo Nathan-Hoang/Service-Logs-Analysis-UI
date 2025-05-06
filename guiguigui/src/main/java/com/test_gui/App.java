@@ -18,7 +18,7 @@ public class App extends Application {
         Parent root = FXMLLoader.load(App.class.getResource("explorer.fxml"));
         mainScene = new Scene(root);
         stage.setScene(mainScene);
-        stage.setTitle("Service Log Analyzer");
+        stage.setTitle("Service Log Analyzer"); 
         stage.setMaximized(true);  // Start maximized
         stage.show();
     }

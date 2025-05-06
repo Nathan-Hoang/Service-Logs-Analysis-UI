@@ -12,6 +12,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.chart.LineChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
@@ -171,6 +172,9 @@ public class PrimaryController {
     private PieChart pieChart;
 
     private final String DATA_FILE = "/data_placeholder/country_request.txt"; // fixed file name and added leading slash
+
+    @FXML
+    private LineChart<String, Number> lineChart;
 
     @FXML
     public void initialize() {
