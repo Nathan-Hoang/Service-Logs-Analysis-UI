@@ -176,3 +176,11 @@
     -fx-fill: #00ffff; /* Neon blue */
     -fx-font-weight: bold;
 }
+.piechart-tooltip {
+    -fx-background-color: #0f172a; /* Neon blue background */
+    -fx-text-fill: #00ffff;     /* Black text or choose what contrasts best */
+    -fx-font-weight: bold;
+    -fx-padding: 8;
+    -fx-border-color: #00ffff; /* Neon blue border */
+    -fx-border-width: 1;
+}

@@ -17,6 +17,12 @@ import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+import javafx.animation.FadeTransition;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Popup;
+import javafx.util.Duration;
+
+
 public class PrimaryController {
 
     @FXML private TableView<?> logTable;
@@ -185,6 +191,35 @@ public class PrimaryController {
         }
 
         pieChart.setData(pieChartData);
+
+        for (PieChart.Data data : pieChart.getData()) {
+            String country = data.getName();
+            double percent = (data.getPieValue() / totalRequests) * 100;
+            int actualCount = (int) data.getPieValue();
+
+            // Create a styled label as a tooltip
+            Label tooltipLabel = new Label(String.format("Country: %s\nPercentage: %.1f%%\nCount: %d", country, percent, actualCount));
+            tooltipLabel.getStyleClass().add("piechart-tooltip");
+            tooltipLabel.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+            Popup popup = new Popup();
+            popup.getContent().add(tooltipLabel);
+            popup.setAutoHide(true);
+
+            FadeTransition fadeIn = new FadeTransition(Duration.millis(200), tooltipLabel);
+            fadeIn.setFromValue(0);
+            fadeIn.setToValue(1);
+
+            // Show tooltip on hover
+            data.getNode().addEventHandler(MouseEvent.MOUSE_ENTERED, event -> {
+                tooltipLabel.setOpacity(0);
+                popup.show(data.getNode(), event.getScreenX() + 10, event.getScreenY() + 10);
+                fadeIn.playFromStart();
+            });
+
+            // Hide tooltip on exit
+            data.getNode().addEventHandler(MouseEvent.MOUSE_EXITED, event -> popup.hide());
+        }
+
     }
 
     public static Map<String, Integer> loadDataFromFile(String filePath) {
@@ -212,6 +247,8 @@ public class PrimaryController {
         }
         return data;
     }
+
+    
 
     // Apply timestamp filter — placeholder for now
     @FXML
