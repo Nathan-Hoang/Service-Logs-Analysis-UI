@@ -1,10 +1,13 @@
 package com.test_gui;
 
 import javafx.application.Application;
-import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.io.IOException;
 
@@ -18,8 +21,8 @@ public class App extends Application {
         Parent root = FXMLLoader.load(App.class.getResource("explorer.fxml"));
         mainScene = new Scene(root);
         stage.setScene(mainScene);
-        stage.setTitle("Service Log Analyzer"); 
-        stage.setMaximized(true);  // Start maximized
+        stage.setTitle("Service Log Analyzer");
+        stage.setMaximized(true);
         stage.show();
     }
 
@@ -27,11 +30,12 @@ public class App extends Application {
         try {
             FXMLLoader loader = new FXMLLoader(App.class.getResource(fxmlFile));
             Parent newRoot = loader.load();
-            mainScene.setRoot(newRoot);  // Just swap the root
+            mainScene.setRoot(newRoot);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
     public static void switchToDashboard() {
         switchScene("primary.fxml");
     }
@@ -43,6 +47,43 @@ public class App extends Application {
     public static void switchToExplorer() {
         switchScene("explorer.fxml");
     }
+
+    // NEW: open the Filter window as a separate stage
+    public static void openFilterStage() {
+        try {
+            FXMLLoader loader = new FXMLLoader(App.class.getResource("filter.fxml"));
+            Parent root = loader.load();
+
+            Stage filterStage = new Stage();
+            filterStage.setTitle("Filter Logs");
+            filterStage.setScene(new Scene(root));
+            filterStage.initOwner(primaryStage); // tie it to the main window
+            filterStage.initModality(Modality.WINDOW_MODAL); // <-- modal behavior
+            filterStage.setResizable(false); // optional
+            filterStage.showAndWait(); // block main window until this one closes
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    @FXML
+    private void onBackButtonPressed(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/com/test_gui/primary.fxml"));
+            Scene scene = new Scene(root);
+            
+            // Get the current stage from the event source
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.setTitle("Dashboard");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
         launch(args);
     }
