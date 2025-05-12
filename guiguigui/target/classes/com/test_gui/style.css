@@ -176,6 +176,7 @@
     -fx-fill: #00ffff; /* Neon blue */
     -fx-font-weight: bold;
 }
+
 .piechart-tooltip {
     -fx-background-color: #0f172a; /* Neon blue background */
     -fx-text-fill: #00ffff;     /* Black text or choose what contrasts best */
@@ -183,4 +184,18 @@
     -fx-padding: 8;
     -fx-border-color: #00ffff; /* Neon blue border */
     -fx-border-width: 1;
+}
+
+.filter-box {
+    -fx-border-color: #00ffff;
+    -fx-border-width: 2;
+    -fx-background-color: #0f172a;
+    -fx-padding: 10;
+    -fx-pref-width: 180;
+    -fx-pref-height: 360; /* double the width */
+    -fx-effect: dropshadow(gaussian, #00ffff, 6, 0.3, 0, 0);
+}
+
+.logic-radio {
+    -fx-text-fill: #00ffff;
 }

@@ -40,54 +40,15 @@
       <padding>
         <Insets bottom="15" left="15" right="15" top="15"/>
       </padding>
-      <children>
-        <!-- Filter Bar with Menu and Search -->
-        <HBox alignment="CENTER_LEFT" spacing="20">
           <children>
-            <!-- Styled Dropdown Filter Menu -->
-            <MenuButton fx:id="filterMenuButton" text="Filter" styleClass="menu-button">
-              <items>
-                <MenuItem text="IP Address" onAction="#onFilterIP"/>
-                <MenuItem text="Timestamp" onAction="#onTimestamp"/>
-                <MenuItem text="Request" onAction="#onRequest"/>
-                <MenuItem text="Status" onAction="#onStatus"/>
-                <MenuItem text="Size" onAction="#onSize"/>
-                <MenuItem text="Referrer" onAction="#onReferrer"/>
-                <MenuItem text="User Agent" onAction="#onFilterUserAgent"/>
-                <MenuItem text="Location" onAction="#onLocation"/>
-              </items>
-            </MenuButton>
-            <!-- Text Search Field -->
-            <TextField fx:id="searchField" promptText="Enter value..." visible="false" managed="false" styleClass="search-field"/>
-            <!-- Date Range Filter -->
-            <HBox fx:id="dateFilterBox" spacing="10" visible="false" managed="false">
-              <children>
-                <DatePicker fx:id="fromDatePicker" promptText="From..." styleClass="date-picker"/>
-                <DatePicker fx:id="toDatePicker" promptText="To..." styleClass="date-picker"/>
-              </children>
-            </HBox>
-            <!-- Time Range Filter -->
-            <HBox fx:id="timeFilterBox" spacing="10" visible="false" managed="false">
-              <children>
-                <TextField fx:id="fromTimeField" promptText="From (HH:mm)" styleClass="search-field"/>
-                <TextField fx:id="toTimeField" promptText="To (HH:mm)" styleClass="search-field"/>
-              </children>
-            </HBox>
-            <!-- Location Filter Box -->
-            <HBox fx:id="locationFilterBox" spacing="10" visible="false" managed="false">
-              <children>
-                <TextField fx:id="countryField" promptText="Country" styleClass="search-field"/>
-                <TextField fx:id="regionField" promptText="Region" styleClass="search-field"/>
-                <TextField fx:id="cityField" promptText="City" styleClass="search-field"/>
-              </children>
-            </HBox>
-            <!-- Filter Apply Button -->
-            <Button fx:id="applyFilterButton" text="Apply" visible="false" managed="false" styleClass="menu-button" onAction="#onApplyFilterButton"/>
-            <Region prefHeight="38.0" HBox.hgrow="ALWAYS"/>
             <!-- Refresh Button -->
-            <Button fx:id="refreshButton" text="Refresh" onAction="#onRefreshButtonPressed" styleClass="menu-button"/>
+            <HBox alignment="TOP_LEFT" spacing="10">
+              <children>
+                <Button fx:id="filterButton" text="Filter" onAction="#onFilterButtonPressed" styleClass="menu-button"/>
+                <Button fx:id="refreshButton" text="Refresh" onAction="#onRefreshButtonPressed" styleClass="menu-button"/>
+              </children>
+            </HBox>
           </children>
-        </HBox>
         <!-- TABLE SECTION with fixed height -->
         <VBox fx:id="tableWrapper" VBox.vgrow="ALWAYS">
           <children>
@@ -140,7 +101,6 @@
             </LineChart>
           </children>
         </HBox>
-      </children>
     </VBox>
   </center>
 </BorderPane>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Pos?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.test_gui.FilterController" stylesheets="@style.css">
+
+    <!-- Top Header Bar -->
+    <top>
+        <HBox alignment="CENTER_LEFT" prefHeight="48.0" style="-fx-background-color: #3B5B75;">
+            <padding>
+                <Insets bottom="10" left="10" right="10" top="10" />
+            </padding>
+            <children>
+                <Label style="-fx-text-fill: white; -fx-font-size: 16px;" text="Service Log Analyzer" />
+            </children>
+        </HBox>
+    </top>
+
+    <!-- Center Content Area -->
+    <center>
+        <VBox spacing="20.0" alignment="TOP_CENTER">
+            <padding>
+                <Insets top="10" left="20" right="20" bottom="20" />
+            </padding>
+
+            <!-- Back Button -->
+            <HBox alignment="TOP_LEFT">
+                <Button fx:id="backButton" text="Back" onAction="#onBackButtonPressed" />
+            </HBox>
+
+            <!-- Grid of Filter Boxes -->
+            <GridPane hgap="15" vgap="15" alignment="CENTER">
+
+                <!-- Row 1 -->
+                <StackPane GridPane.rowIndex="0" GridPane.columnIndex="0" styleClass="filter-box">
+                    <VBox spacing="5">
+                        <Label text="IP Address" />
+                        <TextField fx:id="ipField" promptText="Search IP..." />
+                    </VBox>
+                </StackPane>
+
+                <StackPane GridPane.rowIndex="0" GridPane.columnIndex="1" styleClass="filter-box">
+                    <VBox spacing="5">
+                        <Label text="Timestamp" />
+                        <TextField fx:id="timestampField" promptText="Search Timestamp..." />
+                    </VBox>
+                </StackPane>
+
+                <StackPane GridPane.rowIndex="0" GridPane.columnIndex="2" styleClass="filter-box">
+                    <VBox spacing="5">
+                        <Label text="Location" />
+                        <TextField fx:id="locationField" promptText="Search Location..." />
+                    </VBox>
+                </StackPane>
+
+                <StackPane GridPane.rowIndex="0" GridPane.columnIndex="3" styleClass="filter-box">
+                    <VBox spacing="5">
+                        <Label text="Request" />
+                        <TextField fx:id="requestField" promptText="Search Request..." />
+                    </VBox>
+                </StackPane>
+
+                <!-- Row 2 -->
+                <StackPane GridPane.rowIndex="1" GridPane.columnIndex="0" styleClass="filter-box">
+                    <VBox spacing="5">
+                        <Label text="Response Code" />
+                        <TextField fx:id="codeField" promptText="Search Code..." />
+                    </VBox>
+                </StackPane>
+
+                <StackPane GridPane.rowIndex="1" GridPane.columnIndex="1" styleClass="filter-box">
+                    <VBox spacing="5">
+                        <Label text="Size" />
+                        <TextField fx:id="sizeField" promptText="Search Size..." />
+                    </VBox>
+                </StackPane>
+
+                <StackPane GridPane.rowIndex="1" GridPane.columnIndex="2" styleClass="filter-box">
+                    <VBox spacing="5">
+                        <Label text="Referrer" />
+                        <TextField fx:id="referrerField" promptText="Search Referrer..." />
+                    </VBox>
+                </StackPane>
+
+                <StackPane GridPane.rowIndex="1" GridPane.columnIndex="3" styleClass="filter-box">
+                    <VBox spacing="5">
+                        <Label text="User Agent" />
+                        <TextField fx:id="agentField" promptText="Search Agent..." />
+                    </VBox>
+                </StackPane>
+
+            </GridPane>
+
+            <!-- Bottom Buttons -->
+            <HBox spacing="10" alignment="CENTER_RIGHT">
+                <Button fx:id="clearButton" text="Clear" />
+                <Button fx:id="applyButton" text="Apply" onAction="#onApplyButtonPressed" />
+            </HBox>
+        </VBox>
+    </center>
+</BorderPane>
